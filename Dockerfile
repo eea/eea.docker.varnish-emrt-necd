@@ -1,13 +1,14 @@
-FROM alpine:latest
+FROM debian:jessie-slim
 MAINTAINER "EEA: IDM2 C-TEAM" <eea-edw-c-team-alerts@googlegroups.com>
 
 # Add script that starts varnish.
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 
 # Update the package repository and install varnish.
-RUN apk --no-cache --update add varnish \
- && rm -rf /tmp/* && rm -rf /var/cache/apk/* \
- && chmod 755 /docker-entrypoint.sh
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends varnish && \
+    rm -r /var/lib/apt/lists/* && \
+    chmod 755 /docker-entrypoint.sh
 
 # Make our default VCL available on the container.
 ADD varnish.vcl /etc/varnish/default.vcl
