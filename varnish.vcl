@@ -4,8 +4,8 @@ import std;
 
 # configure all backends
 backend backend_000 {
-   .host = "${VARNISH_BACKEND_HOST}";
-   .port = "${VARNISH_BACKEND_PORT}";
+   .host = ${VARNISH_BACKEND_HOST};
+   .port = ${VARNISH_BACKEND_PORT};
    .connect_timeout = 0.3s;
    .first_byte_timeout = 300s;
    .between_bytes_timeout  = 60s;
