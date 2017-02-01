@@ -20,3 +20,5 @@ varnishd -f /etc/varnish/default.vcl \
          -p http_max_hdr=128 \
          -p http_req_hdr_len=20000 \
          -p http_resp_hdr_len=20000
+sleep 1
+varnishlog
