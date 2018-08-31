@@ -1,29 +1,11 @@
 vcl 4.0;
 
-import std;
-
-# configure all backends
-backend backend_000 {
-   .host = "${VARNISH_BACKEND_HOST}";
-   .port = "${VARNISH_BACKEND_PORT}";
-   .connect_timeout = 0.3s;
-   .first_byte_timeout = 300s;
-   .between_bytes_timeout  = 60s;
-}
-
-
-sub vcl_init {
-
-}
-
 acl purge {
     "127.0.0.1";
     "localhost";
 }
 
 sub vcl_recv {
-
-    set req.backend_hint = backend_000;
 
     if (req.method == "PURGE") {
         # Not from an allowed IP? Then die with an error.
@@ -269,8 +251,7 @@ sub vcl_synth {
     set resp.http.Retry-After = "5";
 
     synthetic( {"
-        <?xml version="1.0" encoding="utf-8"?>
-        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        <!DOCTYPE html>
         <html>
           <head>
             <title>Varnish cache server: "} + resp.status + " " + resp.reason + {" </title>

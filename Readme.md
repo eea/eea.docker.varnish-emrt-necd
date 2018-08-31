@@ -1,5 +1,5 @@
-EMRT-NECD Varnish Alpine image
-==============================
+EMRT-NECD Varnish image
+=======================
 
 [![Docker]( https://dockerbuildbadges.quelltext.eu/status.svg?organization=eeacms&repository=varnish-emrt-necd)](https://hub.docker.com/r/eeacms/varnish-emrt-necd/builds)
 
